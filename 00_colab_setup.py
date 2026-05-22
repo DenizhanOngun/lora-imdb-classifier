@@ -47,17 +47,17 @@ REPO_URL  = f"https://{GITHUB_USERNAME}:{GITHUB_TOKEN}@github.com/{GITHUB_USERNA
 REPO_PATH = f"{DRIVE_BASE}/code/{GITHUB_REPO}"
 
 # Configure git identity
-!git config --global user.email "{GITHUB_EMAIL}"
-!git config --global user.name  "{GITHUB_USERNAME}"
+subprocess.run(f'git config --global user.email "{GITHUB_EMAIL}"', shell=True)
+subprocess.run(f'git config --global user.name "{GITHUB_USERNAME}"', shell=True)
 
 if not os.path.exists(REPO_PATH):
     print("Repository not found, cloning...")
-    !git clone {REPO_URL} {REPO_PATH}
+    subprocess.run(f"git clone {REPO_URL} {REPO_PATH}", shell=True)
     print("✓ Clone complete.")
 else:
     print("Repository exists, pulling latest changes...")
-    !cd {REPO_PATH} && git remote set-url origin {REPO_URL}
-    !cd {REPO_PATH} && git pull
+    subprocess.run(f"cd {REPO_PATH} && git remote set-url origin {REPO_URL}", shell=True)
+    subprocess.run(f"cd {REPO_PATH} && git pull", shell=True)
     print("✓ Pull complete.")
 
 print(f"\nRepository path: {REPO_PATH}")
