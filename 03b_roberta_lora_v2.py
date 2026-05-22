@@ -187,3 +187,32 @@ os.rename(f"/content/{NOTEBOOK_NAME}.txt",
           f"/content/{NOTEBOOK_NAME}.py")
 save_code_to_repo(f"/content/{NOTEBOOK_NAME}.py")
 push_to_github("roberta lora v2 complete acc 0.9560 - 256/256 head+tail")
+
+results = {
+    "model"             : "RoBERTa + LoRA V2",
+    "accuracy"          : 0.9560,
+    "f1"                : 0.9562,
+    "precision"         : 0.9523,
+    "recall"            : 0.9601,
+    "roc_auc"           : 0.9900,
+    "train_time_minutes": 42.2,
+    "head_tail"         : "256/256",
+    "learning_rate"     : 2e-4,
+    "epochs"            : 3,
+}
+
+save_results(results, "roberta_lora_v2.json")
+
+model.save_pretrained(f"{DIRS['checkpoints_v2']}/final")
+tokenizer.save_pretrained(f"{DIRS['checkpoints_v2']}/final")
+print("✓ Model saved to Drive.")
+
+NOTEBOOK_NAME = "03b_roberta_lora_v2"
+!jupyter nbconvert --to script \
+  "/content/drive/MyDrive/Colab Notebooks/{NOTEBOOK_NAME}.ipynb" \
+  --output-dir "/content/"
+import os
+os.rename(f"/content/{NOTEBOOK_NAME}.txt",
+          f"/content/{NOTEBOOK_NAME}.py")
+save_code_to_repo(f"/content/{NOTEBOOK_NAME}.py")
+push_to_github("roberta lora v2 complete acc 0.9560 - 256/256 head+tail")
