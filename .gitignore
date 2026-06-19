@@ -14,7 +14,6 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
 
 # OS
 .DS_Store
